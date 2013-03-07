@@ -1,0 +1,8 @@
+DOTCLOUD = {
+    # You can find your api key at https://account.dotcloud.com/settings/
+    'APIKEY': 'XXXX:XXXXXXXX',
+    'APPNAME': 'abcdefg',
+}
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'abc123'

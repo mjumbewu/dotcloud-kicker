@@ -1,5 +1,71 @@
 @import '../libs/bootstrap/less/bootstrap.less';
 @import '../libs/bootstrap/less/responsive.less';
+@import '../libs/font-awesome/less/font-awesome.less';
+
+@iconSpritePath:      "../libs/bootstrap/img/glyphicons-halflings.png";
+@iconWhiteSpritePath: "../libs/bootstrap/img/glyphicons-halflings-white.png";
+@FontAwesomePath:     "../libs/font-awesome/font";
+
+button {
+  .btn;
+}
+
+button[type="submit"] {
+  .btn-primary;
+}
+
+h2 {
+  padding: 0;
+  margin-bottom: @baseLineHeight;
+  font-size: @baseFontSize * 1.5;
+  line-height: @baseLineHeight * 2;
+  color: @grayDark;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+
+  // Small
+  small {
+    font-size: @baseLineHeight * .75;
+    color: @grayLight;
+  }
+
+  clear: both;
+}
+
+h3 {
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  margin-bottom: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.help-text {
+  .help-block;
+  font-size: (@baseFontSize * 0.75);
+}
+
+#kick-page {
+  .container-fluid;
+}
+
+#kick-page .instance-list li {
+
+  article {
+    float: left;
+  }
+
+  form {
+    float: right;
+
+    button {
+      margin-top: (@baseLineHeight / 2);
+      font-size: (@baseFontSize * 2);
+    }
+  }
+}
 
 @media screen and (min-width: @navbarCollapseWidth) {
   body {

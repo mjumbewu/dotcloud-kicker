@@ -1,5 +1,35 @@
-{% extends "kicker/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
-  hello
+  <div id="kick-page" class="page">
+    <section class="application-info">
+      <h1>{{ application.name }}</h1>
+      {% for service in application.services %}
+        <h2>{{ service.name }}</h2>
+        <ul class="instance-list">
+        {% for instance in service.instances %}
+          <li>
+            <article>
+              <h3>Instance {{ instance.instance_id }}</h3>
+              <span class="help-text">
+                {% if instance.latest_kick == None %}
+                  Never been kicked.
+                {% else %}
+                  Last kicked <time datetime="{{ instance.latest_kick.at.isoformat }}">{{ instance.latest_kick.at.isoformat }}</time>.
+                {% endif %}
+              </span>
+            </article>
+
+            <form method="POST">{% csrf_token %}
+              <input type="hidden" name="application" value="{{ application.name }}">
+              <input type="hidden" name="service" value="{{ service.name }}">
+              <input type="hidden" name="instance" value="{{ instance.instance_id }}">
+              <button type="submit"><i class="icon-refresh"></i></button>
+            </form>
+          </li>
+        {% endfor %}
+        </ul>
+      {% endfor %}
+    </section>
+  </div>
 {% endblock %}

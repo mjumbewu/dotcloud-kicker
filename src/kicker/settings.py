@@ -32,9 +32,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '=_1@ii=b96hwt6^*vumgs%vckj*b$f8)$h4!@_zy2n^)r6o5dn'
-
 TEMPLATE_DIRS = ()
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -92,3 +89,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from kicker.local_settings import *
+except ImportError:
+    pass
