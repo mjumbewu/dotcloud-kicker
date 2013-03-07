@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# =============================================================================
+# Post-install hook file for configuring dotcloud server
+
+echo "Writing the local settings file..."
+
+cat >> src/kicker/local_settings.py <<EOF
+
+import json
+import os.path
+
+with open('/home/dotcloud/environment.json') as f:
+    env = json.load(f)
+
+DOTCLOUD = {
+    'APIKEY': env.get('APIKEY'),
+    'APPNAME': env.get('APPNAME'),
+}
+
+SECRET_KEY = env.get('SECRET_KEY')
+
+STATIC_ROOT = '/home/dotcloud/current/static/'
+
+# Debug is False by default, true if set in the environment.
+DEBUG = (env.get('DEBUG', 'False') in ['true', 'True'])
+TEMPLATE_DEBUG = DEBUG
+
+EOF
+
+echo "Setting up static file service..."
+src/manage.py collectstatic --noinput
+
+echo "Configuring nginx to serve static files..."
+cat >> nginx.conf <<EOF
+location /static/ { root /home/dotcloud/current ; }
+EOF
