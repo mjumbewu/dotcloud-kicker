@@ -13,6 +13,13 @@ import os.path
 with open('/home/dotcloud/environment.json') as f:
     env = json.load(f)
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '/home/dotcloud/data/kicker.sqlite3',
+    }
+}
+
 DOTCLOUD = {
     'APIKEY': env.get('APIKEY'),
     'APPNAME': env.get('APPNAME'),
@@ -30,6 +37,9 @@ EOF
 
 echo "Setting up static file service..."
 src/manage.py collectstatic --noinput
+
+echo "Syncing the database..."
+src/manage.py syncdb --noinput
 
 echo "Configuring nginx to serve static files..."
 cat >> nginx.conf <<EOF
