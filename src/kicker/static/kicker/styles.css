@@ -9137,6 +9137,9 @@ h3 {
 ul {
   list-style: none;
 }
+li {
+  clear: both;
+}
 .help-text {
   color: #595959;
   display: block;
